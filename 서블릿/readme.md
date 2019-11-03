@@ -24,3 +24,8 @@ tomcat
 
 
     
+## 서블릿 요청데이터 인코딩 설정 / 응답데이터 contentType 설정
+요청데이터 : request.setCharacterEncoding("utf-8"); //인코딩 설정
+응답데이터 : response.setContentType("text/html;charset=utf-8"); //응답데이터의 데이터타입(MIME-TYPE)
+
+응답데이터의 데이터 타입을 설정해주는 이유
