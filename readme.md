@@ -1,7 +1,14 @@
+# 자바 웹을 다루는 기술
 
+# JDK 10 설치
 
-
-
+# 톰캣설치
+## tomcat 9 
+Core > Windows Service Installer > 기본설정으로 next버튼 누르며 설치<br>
+tomcat 8(이전버전)을 삭제하고 싶을 땐 cmd창에 
+~~~
+sc delete Tomcat8
+~~~
 
 # DataBase
 ## 사용자 생성 / 권한부여
@@ -12,15 +19,52 @@
 ## DBMS 수동 설정하기
 1. 내컴퓨터>우클릭_관리>서비스및응용프로그램>서비스> OracleServiceXE, OracleXTNSListner를 수동으로 설정.
 
+# exERD 를 이클립스에 설치하기
+Help > install New software > add > Name : exERD , Location : http://exerd.com/update <br>
+설치를 마치고 나면 File > New > others 이후 eXERD 폴더가 보이면 정상
+
 # 톰캣서버에 배포하기
+https://jang8584.tistory.com/72 알찬 정보들 많네~
+## 웹어플리케이션 기본 구조
+~~~
+webApplication Name(줄여서 app으로 표기)
+              ┗ WEB-INF            // 외부에서 접근 불가능
+                     ┗ classes     // 서블릿, 클래스
+                     ┗ lib         // 라이브러리 압축파일(jar), DB연동 드라이버, 프레임워크 기능 관련jar 파일
+                                      lib의 jar는 클래스 패스가 자동으로 설정된다.
+                     ┗ bin         // 각종 실행 파일이 위치한 곳
+                     ┗ conf        // 프레임워크에서 사용하는 각종 설정 파일이 저장된 곳
+                     ┗ web.xml     // 배치 지시자(deployment decriptor)로서 일종의 환경설정파일
+~~~
+
 ## 수동배포
+### CATALINA_HOME 이란?
+JDK의 루트디렉토리를 JAVA_HOME이라고 부른것 처럼 <br>
+톰캣의 루트디렉토리 C:/tomcat9/ 을 뜻함.
+~~~
+C:/tomcat9/             // CATALINA_HOME
+          ┗ webapps     // 웹어플리케이션 폴더 webShop(위 웹어플리케이션 기본구조를 갖춘 폴더)를 복붙하면 배포가 이루어짐.
+            ┗ app1
+            ┗ app2
+            ┗ app3
+            ┗ 보이지 않지만 server.xml에서 컨텍스트를 추가할 수 있다. <Host> 자식태그 <Context path=" ">     
+            ┗....
+          ┗ bin
+          ┗ conf
+          ┗ lib
+          ┗ log
+          ┗ temp
+          ┗ work
+~~~
 ### 컨텍스트란 : server.xml에 등록하는 웹 어플리케이션을 뜻함.
+특징1. 웹어플리케이션당 하나의 컨텍스트가 등록된다.
+특징2. 웹어플리케이션이름과 다른 별도의 별칭을 부여할 수 있다.
 톰캣 컨테이너에 컨텍스트 등록하기.tomcat/conf/server.xml
 ~~~
 <Host name="localhost"  appBase="webapps"
             unpackWARs="true" autoDeploy="true">
-          <Context path="/webMal"
-                    docBase="c:\webShop"
+          <Context path="/webMal"           //요청URL의 형태가 /webMal일때
+                    docBase="c:\webShop"    //컨텍스트를 C:\webShop으로 잡아라
                     reloadable="true"/>
         ...............             
       </Host>
