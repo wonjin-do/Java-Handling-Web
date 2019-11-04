@@ -28,4 +28,9 @@ tomcat
 요청데이터 : request.setCharacterEncoding("utf-8"); //인코딩 설정
 응답데이터 : response.setContentType("text/html;charset=utf-8"); //응답데이터의 데이터타입(MIME-TYPE)
 
-응답데이터의 데이터 타입을 설정해주는 이유
+### 응답데이터의 데이터 타입(MIME)을 설정해주는 이유
+: 브라우저가 전송받을 데이터의 타입을 알고 있으면 빠르게 처리할 수 있기 때문.
+따라서, 톰켓 컨테이너가 미리 제공하는 데이터 타입중 하나를 지정해서 브라우저로 전송함.
+미리 제공하는 데이터타입은 MIME-TYPE이라고 함. text/html , text/plain, application/xml 등이 있으며 그 외는 CATALINA_HOME/conf/web.xml에 추가하여 사용가능함.
+
+
