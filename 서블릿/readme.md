@@ -237,11 +237,13 @@ public class MemberDAO {
 
 
 톰캣실행에러
-Server Tomcat v8.5 Server at localhost failed to start.
+Server Tomcat v8.5 Server at localhost failed to start.<
 해결책
 tomcat Overview창에서 "Publish module contexts to separate XML files" 체크해준다.
-
-<a href='/컨택스트path/~~~'> 로 링크의 경로는 웹어플리케이션 폴더부터 명시해준다.
+~~~
+<a href='/컨택스트path/~~~'> 
+~~~
+로 링크의 경로는 웹어플리케이션 폴더부터 명시해준다.
 
 
 	
