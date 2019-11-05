@@ -33,4 +33,20 @@ tomcat
 따라서, 톰켓 컨테이너가 미리 제공하는 데이터 타입중 하나를 지정해서 브라우저로 전송함.
 미리 제공하는 데이터타입은 MIME-TYPE이라고 함. text/html , text/plain, application/xml 등이 있으며 그 외는 CATALINA_HOME/conf/web.xml에 추가하여 사용가능함.
 
+## 서블릿 DB연동하기
+~~~
+create table t_member(
+id varchar2(10) primary key,
+pwd varchar2(10),
+name varchar2(50),
+email varchar2(50),
+joinDate date default sysdate
+);
 
+insert into t_member values('hong','1212','홍길동', 'hong@gmail.com',sysdate);
+insert into t_member values('lee','1212','이순신', 'lee@gmail.com',sysdate);
+insert into t_member values('kim','1212','김유신', 'kim@gmail.com',sysdate);
+commit;
+select *from t_member;
+
+~~~
