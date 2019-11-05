@@ -50,3 +50,87 @@ commit;
 select *from t_member;
 
 ~~~
+
+### JDBC
+오라클DB --- WAS 연동에 필요한 드라이버 ojdbc6.jar를
+프로젝트의 /WebContent/WEB-INF/lib 폴더에 복사하여 붙여 넣는다.
+ojdbc.jar은 다음 링크를 통해 다운받는다.
+https://www.oracle.com/technetwork/apps-tech/jdbc-112010-090769.html
+
+Mysql
+https://dev.mysql.com/downloads/connector/j/
+
+
+~~~
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+public class MemberDAO {
+	private static final String driver = "oracle.jdbc.driver.OracleDriver";
+	private static final String url = "jdbc:oracle:thin:@localhost:1521:XE";
+	private static final String user = "scott";
+	private static final String pwd = "tiger";
+	private Connection con;
+	private Statement stmt;
+
+	public List<MemberVO> listMembers() {
+		List<MemberVO> list = new ArrayList<MemberVO>();
+		try {
+			connDB();
+			String query = "select * from t_member ";
+			System.out.println(query);
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				String id = rs.getString("id");
+				String pwd = rs.getString("pwd");
+				String name = rs.getString("name");
+				String email = rs.getString("email");
+				Date joinDate = rs.getDate("joinDate");
+				MemberVO vo = new MemberVO();
+				vo.setId(id);
+				vo.setPwd(pwd);
+				vo.setName(name);
+				vo.setEmail(email);
+				vo.setJoinDate(joinDate);
+				list.add(vo);
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	private void connDB() {
+		try {
+			Class.forName(driver);
+			System.out.println("Oracle 드라이버 로딩 성공");
+			con = DriverManager.getConnection(url, user, pwd);
+			System.out.println("Connection 생성 성공");
+			stmt = con.createStatement();
+			System.out.println("Statement 생성 성공");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+~~~
+위 코드를 통해 웹페이지에 접속하면 Oracle로딩 Connection생성 Statement생성 등 자원을 반복적으로 쓰고있음(단점)
+
+### DBCP(톰캣 컨테이너가 DBCP객체를 가지고 있음)
+www.java2s.com/Code/Jar/t/Downloadtomcatdbcp7030jar.htm (html 아님)
+ConnectionPool 객체를 구현할 때, Java SE의 javax.sql.DataSource클래스를 이용.
+#### JNDI
+웹어플리케이션 실행시, 톰캣이 만들어 놓은 ConnectionPool 객체에 접근할 때는 JNDI를 이용.
+JNDI란 (Java Naming and Directory Interface) key : value로 설정정보를 가져오는 방법.
+
+
+
+
+
