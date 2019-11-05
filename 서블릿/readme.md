@@ -130,7 +130,121 @@ ConnectionPool 객체를 구현할 때, Java SE의 javax.sql.DataSource클래스
 웹어플리케이션 실행시, 톰캣이 만들어 놓은 ConnectionPool 객체에 접근할 때는 JNDI를 이용.
 JNDI란 (Java Naming and Directory Interface) key : value로 설정정보를 가져오는 방법.
 
+이클립스에 톰캣을 추가하면 이클립스가 톰캣설정파일 servers/Tomcat v9.0 Server at localhost-config/context.xml을 생성함.
+~~~
+    <!-- Uncomment this to disable session persistence across Tomcat restarts -->
+    <!--
+    <Manager pathname="" />
+    -->
+    <Resource
+    	name="jdbc/oracle"         // DataSource에 대한 JNDI 이름.. 이것을 통해 데이터
+    	auth="Container"
+    	type="javax.sql.DataSource"
+    	driverClassName="oracle.jdbc.OracleDriver"
+    	url="jdbc:oracle:thin:@localhost:1521:XE"
+    	username="scott"
+    	password="tiger"
+    	maxActive="50"
+    	maxWait="-1"/>
+~~~
+톰캣실행 시 연결할 데이터베이스 설정정보를 /context.xml에 입력한다.
 
+사용법은 아래와 같다.
+~~~
+package sec02.ex01;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
+
+public class MemberDAO {
+	/*
+	private static final String driver = "oracle.jdbc.driver.OracleDriver";
+	private static final String url = "jdbc:oracle:thin:@localhost:1521:XE";
+	private static final String user = "scott";
+	private static final String pwd = "tiger";
+	*/
+	
+	private Connection con;
+	private PreparedStatement pstmt;
+	private DataSource dataFactory;
+	
+	public MemberDAO() {
+		try {
+			Context ctx = new InitialContext();
+			Context envContext = (Context) ctx.lookup("java:/comp/env"); 
+			dataFactory = (DataSource) envContext.lookup("jdbc/oracle"); //name이 jdbc/oracle인 DataSource를 검색한다.
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public List listMembers() {
+		List list = new ArrayList();
+		try {
+			//connDB();
+			con=dataFactory.getConnection(); //DataSource를 통해 커넥션풀에서 커넥션을 가져온다.
+			String query = "select * from t_member ";
+			System.out.println("prepareStatememt: " + query);
+			pstmt = con.prepareStatement(query);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				String id = rs.getString("id");
+				String pwd = rs.getString("pwd");
+				String name = rs.getString("name");
+				String email = rs.getString("email");
+				Date joinDate = rs.getDate("joinDate");
+				MemberVO vo = new MemberVO();
+				vo.setId(id);
+				vo.setPwd(pwd);
+				vo.setName(name);
+				vo.setEmail(email);
+				vo.setJoinDate(joinDate);
+				list.add(vo);
+			}
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+
+/*	private void connDB() {
+		try {
+			Class.forName(driver);
+			System.out.println("Oracle 드라이버 로딩 성공");
+			con = DriverManager.getConnection(url, user, pwd);
+			System.out.println("Connection 생성 성공");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}*/
+}
+~~~
+
+
+
+
+톰캣실행에러
+Server Tomcat v8.5 Server at localhost failed to start.
+해결책
+tomcat Overview창에서 "Publish module contexts to separate XML files" 체크해준다.
+
+<a href='/컨택스트path/~~~'> 로 링크의 경로는 웹어플리케이션 폴더부터 명시해준다.
+
+
+	
 
 
 
