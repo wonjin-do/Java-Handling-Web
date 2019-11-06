@@ -1,3 +1,5 @@
+Q1. p.211 컨택스트를 붙이는 경우와 아닌경우 이유....
+
 # 서블릿API 계층구조
 ~~~
 Servlet  ServletConfig   // 인터페이스
@@ -240,10 +242,14 @@ public class MemberDAO {
 Server Tomcat v8.5 Server at localhost failed to start.<
 해결책
 tomcat Overview창에서 "Publish module contexts to separate XML files" 체크해준다.
+
+url경로 지정방식
 ~~~
-<a href='/컨택스트path/~~~'> 
+<a href='/ContextPath/servletMapping'> 
+<form action="servletMapping" encType="UTF-8">  // 어플리케이션폴더(컨택스트)가 없이.
 ~~~
-로 링크의 경로는 웹어플리케이션 폴더부터 명시해준다.
+
+
 
 
 	
