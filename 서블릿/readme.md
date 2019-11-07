@@ -246,12 +246,35 @@ tomcat Overview창에서 "Publish module contexts to separate XML files" 체크�
 url경로 지정방식
 ~~~
 p.251 
-MemberServlet.java<br>
-...
+MemberServlet.java
+@WebServlet("/test01/member")
+.....
 out.print("<a href='/pro07/memberForm.html'>새 회원 가입하기</a>"); 
 ~~~
-브라우저는 소스파일인 MemberServlet.java 서블릿의 웹어플리케이션 폴더상의 경로를 알지 못함.
-따라서 MemberServlet.java에서 out 객체로 브라우져에게 전송할 때는 절대경로로 직접지정한다.(아래설명 2)과 동일)
+<a href='memberForm.html'>새 회원 가입하기</a><br>
+<a href='./memberForm.html'>새 회원 가입하기</a><br>
+<a href='/pro07/memberForm.html'>새 회원 가입하기</a><br>
+세 경우 모두 가능.
+
+이유)
+첫 번째, 두 번째 예시의 경우 
+http://localhost:8090/pro07/test01/member 인 url 상태에서 
+member의 앞까지인 http://localhost:8090/pro07/test01 을 memberForm.html에 붙혀서 요청함.
+http://localhost:8090/pro07/test01/memberForm.html 이 됨.
+모든 url요청은 이런 식으로 이루어짐.
+
+<응용>
+<a href='../memberForm.html> 인 경우
+http://localhost:8090/pro07/test01/member 인 url 상태에서
+http://localhost:8090/pro07/ 을 붙혀서 
+http://localhost:8090/pro07/memberForm.html이 됨.
+
+
+	 
+
+
+
+
 
 ~~~
 CATALINA_HOME
