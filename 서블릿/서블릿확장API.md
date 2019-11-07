@@ -5,8 +5,8 @@ Q. Servlet생성할 때, next 눌러서 체크란에 ingerited abstract methods�
 ## redirect / Refresh / location
 새로운 요청흐름이 발생함. 브라우저에게 강제함.<br>
 
-redirect : response.sendRedirect("***.jsp");
-refresh : response.addHeader("Refresh",경과시간(초);url=***.jsp");
+redirect : response.sendRedirect("***.jsp");<br>
+refresh : response.addHeader("Refresh",경과시간(초);url=***.jsp");<br>
 location : location.href = '***.jsp';
 
 ## dispatch
