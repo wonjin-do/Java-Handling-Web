@@ -254,22 +254,19 @@ MemberServlet.java<br>
 따라서 MemberServlet.java에서 out 객체로 브라우져에게 전송할 때는 절대경로로 직접지정한다.(아래설명 2)과 동일)
 
 ~~~
-
-
-~~~
 CATALINA_HOME
 	┗ app (pro06)
 	   ┗ dir (test01)
 	      ┗ html (login.html)
 	   ┗ WEB-INF
 	   ┗ META-INF
+~~~
 http://localhost:8090/pro06/test01/login.html 로 html문서가 폴더안에 있을 때
 
 1) /가 맨앞에 없이 키워드만 있을 때
-1-1)
+1-1)<br>
 action = "loginTest" 
-접속되는 url 주소는 http://localhost:8090/pro06/test01/ (html파일 login.html이 위치한 폴더경로)가 붙은
-http://localhost:8090/pro06/test01/loginTest 이다.
+접속되는 url 주소는 http://localhost:8090/pro06/test01/ (html파일 login.html이 위치한 폴더경로)가 붙은 http://localhost:8090/pro06/test01/loginTest 이다.
 컨택스트 루트 : /pro06
 서블릿 맵핑값 : /test01/loginTest
 
@@ -277,42 +274,43 @@ http://localhost:8090/pro06/test01/loginTest 이다.
 @WebServlet("/loginTest")가 달린 Servlet만 있을 경우 문제가 발생함. ★★★★★ 아래 2-2)에서 해결책이 제시됨.
 
 재미있는 점은,  action = "future.html"일 경우("/"가 없는) 현 login.html이 위치한 곳의 future.html 파일로 이동하는 것이다.
+~~~
 CATALINA_HOME
 	┗ app (pro06)
 	   ┗ dir (test01)
 	      ┗ html (login.html)
 	      ┗ html (future.html)
-따라서, 상대경로 action = "./future.html" 와 동일하다. 
+~~~
 
-만약, html이 폴더안에 있는 것이 아닌 웹어플리케이션 폴더(컨텍스트)에 놓여있다면
+따라서, 상대경로 action = "./future.html" 와 동일하다. <br>
+
+만약, html이 폴더안에 있는 것이 아닌 웹어플리케이션 폴더(컨텍스트)에 놓여있다면<br>
+~~~
 CATALINA_HOME
 	┗ app (pro06)
 	   ┗ html (login.html) 
 	   ┗ WEB-INF
 	   ┗ META-INF
-html파일의 주소 http://localhost:8090/pro06/login.html 
-
-1-2)
-action = "loginTest"
-1-1과 마찬가지로 url주소에 html이 위치한 경로 http://localhost:8090/pro06/ 이 따라 붙어
-http://localhost:8090/pro06/loginTest 로 url이 완성됨.
-컨택스트 루트 : /pro06
-서블릿 맵핑값 : /loginTest
-따라서 @WebServlet("/loginTest")가 달린 Servlet이 있을 경우 동작한다.
-
-2) /가 맨 앞에 있는 경우
-/는 CATALINA_HOME 을 뜻하므로 절대경로로 '직접' 지정하는 것이다.
-2-1)
-action = "/"이면 
-이후 접속되는 url주소는 http://localhost:8090/ 이다. ( "/"는 "CATALINA_HOME 이다.)
-2-2)
-action = "/pro06/loginTest"이면
-이후 접속되는 url주소는 http://localhost:8090/pro06/loginTest 이다. (정상)
-
-
-
-
 ~~~
+html파일의 주소 http://localhost:8090/pro06/login.html <br>
+
+1-2)<br>
+action = "loginTest"<br>
+1-1과 마찬가지로 url주소에 html이 위치한 경로 http://localhost:8090/pro06/ 이 따라 붙어<br>
+http://localhost:8090/pro06/loginTest 로 url이 완성됨.<br>
+컨택스트 루트 : /pro06<br>
+서블릿 맵핑값 : /loginTest<br>
+따라서 @WebServlet("/loginTest")가 달린 Servlet이 있을 경우 동작한다.<br>
+
+2) /가 맨 앞에 있는 경우<br>
+/는 CATALINA_HOME 을 뜻하므로 절대경로로 '직접' 지정하는 것이다.<br>
+2-1)<br>
+action = "/"이면 <br>
+이후 접속되는 url주소는 http://localhost:8090/ 이다. ( "/"는 "CATALINA_HOME 이다.)<br>
+2-2)<br>
+action = "/pro06/loginTest"이면<br>
+이후 접속되는 url주소는 http://localhost:8090/pro06/loginTest 이다. (정상)<br>
+
 
 	
 
