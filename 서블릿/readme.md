@@ -248,7 +248,7 @@ url경로 지정방식
 p.251 
 MemberServlet.java<br>
 ...
-<a href='/pro07/memberForm.html'> 
+out.print("<a href='/pro07/memberForm.html'>새 회원 가입하기</a>"); 
 ~~~
 브라우저는 소스파일인 MemberServlet.java 서블릿의 웹어플리케이션 폴더상의 경로를 알지 못함.
 따라서 MemberServlet.java에서 out 객체로 브라우져에게 전송할 때는 절대경로로 직접지정한다.(아래설명 2)과 동일)
