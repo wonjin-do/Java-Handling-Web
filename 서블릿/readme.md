@@ -245,10 +245,8 @@ tomcat Overview창에서 "Publish module contexts to separate XML files" 체크�
 
 url경로 지정방식
 ~~~
-
 p.251 
-~~~
-MemberServlet.java
+MemberServlet.java<br>
 ...
 <a href='/pro07/memberForm.html'> 
 ~~~
