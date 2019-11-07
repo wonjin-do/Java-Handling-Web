@@ -238,104 +238,38 @@ public class MemberDAO {
 
 
 
-톰캣실행에러
-Server Tomcat v8.5 Server at localhost failed to start.<
-해결책
-tomcat Overview창에서 "Publish module contexts to separate XML files" 체크해준다.
+톰캣실행에러<br>
+Server Tomcat v8.5 Server at localhost failed to start.<br>
+해결책<br>
+tomcat Overview창에서 "Publish module contexts to separate XML files" 체크해준다.<br>
 
-url경로 지정방식
+## url경로 지정방식
 ~~~
 p.251 
 MemberServlet.java
 @WebServlet("/test01/member")
 .....
 out.print("<a href='/pro07/memberForm.html'>새 회원 가입하기</a>"); 
-~~~
+
+<--
+아래 세 경우 모두 가능
 <a href='memberForm.html'>새 회원 가입하기</a><br>
 <a href='./memberForm.html'>새 회원 가입하기</a><br>
 <a href='/pro07/memberForm.html'>새 회원 가입하기</a><br>
-세 경우 모두 가능.
+-->
+~~~
 
-이유)
-첫 번째, 두 번째 예시의 경우 
-http://localhost:8090/pro07/test01/member 인 url 상태에서 
+이유)<br>
+첫 번째, 두 번째 예시의 경우 <br>
+http://localhost:8090/pro07/test01/member 인 url 상태에서 <br>
 member의 앞까지인 http://localhost:8090/pro07/test01 을 memberForm.html에 붙혀서 요청함.
-http://localhost:8090/pro07/test01/memberForm.html 이 됨.
-모든 url요청은 이런 식으로 이루어짐.
+http://localhost:8090/pro07/test01/memberForm.html 이 됨.<br>
+모든 url요청은 이런 식으로 이루어짐.<br>
 
-<응용>
-<a href='../memberForm.html> 인 경우
-http://localhost:8090/pro07/test01/member 인 url 상태에서
-http://localhost:8090/pro07/ 을 붙혀서 
-http://localhost:8090/pro07/memberForm.html이 됨.
-
-
-	 
-
-
-
-
-
-~~~
-CATALINA_HOME
-	┗ app (pro06)
-	   ┗ dir (test01)
-	      ┗ html (login.html)
-	   ┗ WEB-INF
-	   ┗ META-INF
-~~~
-http://localhost:8090/pro06/test01/login.html 로 html문서가 폴더안에 있을 때
-
-1) /가 맨앞에 없이 키워드만 있을 때
-1-1)<br>
-action = "loginTest" 
-접속되는 url 주소는 http://localhost:8090/pro06/test01/ (html파일 login.html이 위치한 폴더경로)가 붙은 http://localhost:8090/pro06/test01/loginTest 이다.
-컨택스트 루트 : /pro06
-서블릿 맵핑값 : /test01/loginTest
-
-따라서 @WebServlet("/test01/loginTest")가 달린 Servlet이 있을 경우 동작한다.
-@WebServlet("/loginTest")가 달린 Servlet만 있을 경우 문제가 발생함. ★★★★★ 아래 2-2)에서 해결책이 제시됨.
-
-재미있는 점은,  action = "future.html"일 경우("/"가 없는) 현 login.html이 위치한 곳의 future.html 파일로 이동하는 것이다.
-~~~
-CATALINA_HOME
-	┗ app (pro06)
-	   ┗ dir (test01)
-	      ┗ html (login.html)
-	      ┗ html (future.html)
-~~~
-
-따라서, 상대경로 action = "./future.html" 와 동일하다. <br>
-
-만약, html이 폴더안에 있는 것이 아닌 웹어플리케이션 폴더(컨텍스트)에 놓여있다면<br>
-~~~
-CATALINA_HOME
-	┗ app (pro06)
-	   ┗ html (login.html) 
-	   ┗ WEB-INF
-	   ┗ META-INF
-~~~
-html파일의 주소 http://localhost:8090/pro06/login.html <br>
-
-1-2)<br>
-action = "loginTest"<br>
-1-1과 마찬가지로 url주소에 html이 위치한 경로 http://localhost:8090/pro06/ 이 따라 붙어<br>
-http://localhost:8090/pro06/loginTest 로 url이 완성됨.<br>
-컨택스트 루트 : /pro06<br>
-서블릿 맵핑값 : /loginTest<br>
-따라서 @WebServlet("/loginTest")가 달린 Servlet이 있을 경우 동작한다.<br>
-
-2) /가 맨 앞에 있는 경우<br>
-/는 CATALINA_HOME 을 뜻하므로 절대경로로 '직접' 지정하는 것이다.<br>
-2-1)<br>
-action = "/"이면 <br>
-이후 접속되는 url주소는 http://localhost:8090/ 이다. ( "/"는 "CATALINA_HOME 이다.)<br>
-2-2)<br>
-action = "/pro06/loginTest"이면<br>
-이후 접속되는 url주소는 http://localhost:8090/pro06/loginTest 이다. (정상)<br>
-
-
-	
-
+### 응용<br>
+<a href='../memberForm.html> 인 경우<br>
+http://localhost:8090/pro07/test01/member 인 url 상태에서<br>
+http://localhost:8090/pro07/ 을 붙혀서 <br>
+http://localhost:8090/pro07/memberForm.html이 됨.<br>
 
 
