@@ -252,24 +252,11 @@ MemberServlet.java
 out.print("<a href='/pro07/memberForm.html'>새 회원 가입하기</a>"); 
 
 <--
-아래 세 경우 모두 가능
-<a href='memberForm.html'>새 회원 가입하기</a><br>
-<a href='./memberForm.html'>새 회원 가입하기</a><br>
-<a href='/pro07/memberForm.html'>새 회원 가입하기</a><br>
+현재 url ) localhost:8090/pro07/test01/member
+<a href='memberForm.html'>새 회원 가입하기</a>        // localhost:8090/pro07/test01/memberForm.html <br>
+<a href='./memberForm.html'>새 회원 가입하기</a>      // localhost:8090/pro07/test01/memberForm.html<br>
+<a href='../memberForm.html>새 회원 가입하기</a>      // localhost:8090/pro07/memberForm.html<br>
+<a href='/pro07/memberForm.html'>새 회원 가입하기</a> // localhost:8090/pro07/memberForm.html<br>
+3,4번째 경우만 정답!
 -->
 ~~~
-
-이유)<br>
-첫 번째, 두 번째 예시의 경우 <br>
-http://localhost:8090/pro07/test01/member 인 url 상태에서 <br>
-member의 앞까지인 http://localhost:8090/pro07/test01 을 memberForm.html에 붙혀서 요청함.
-http://localhost:8090/pro07/test01/memberForm.html 이 됨.<br>
-모든 url요청은 이런 식으로 이루어짐.<br>
-
-### 응용<br>
-<a href='../memberForm.html> 인 경우<br>
-http://localhost:8090/pro07/test01/member 인 url 상태에서<br>
-http://localhost:8090/pro07/ 을 붙혀서 <br>
-http://localhost:8090/pro07/memberForm.html이 됨.<br>
-
-
