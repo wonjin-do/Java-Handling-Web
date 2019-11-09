@@ -264,7 +264,7 @@ public class FileDownload extends HttpServlet {
 
 ~~~
 
-# 부록(최범균 JSP 프로그램)
+# 부록(최범균 JSP 프로그램) jsp3.0 이상부터 지원되는 part인터페이스를 이용함.
 web.xml
 ~~~
 <?xml version="1.0" encoding="UTF-8"?>
