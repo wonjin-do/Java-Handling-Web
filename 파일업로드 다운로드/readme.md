@@ -231,13 +231,17 @@ public class FileDownload extends HttpServlet {
 	private void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
-		
-    String file_repo = "C:\\file_repo"; //다운로드할 파일이 위치한 디렉토리
-		String fileName = (String) request.getParameter("fileName"); //다운받을 파일이름
+		//다운로드할 파일이 위치한 디렉토리
+    		String file_repo = "C:\\file_repo"; 
+		//다운받을 파일이름
+		String fileName = (String) request.getParameter("fileName"); 
 		System.out.println("fileName=" + fileName);
-		OutputStream out = response.getOutputStream(); //브라우저로 전송을 담당할 output스트림객체
-		String downFile = file_repo + "\\" + fileName; //다운받을 파일의 전체경로
-		File f = new File(downFile); //다운로드받을 파일의 파일객체
+		//브라우저로 전송을 담당할 output스트림객체
+		OutputStream out = response.getOutputStream(); 
+		//다운받을 파일의 전체경로
+		String downFile = file_repo + "\\" + fileName; 
+		//다운로드받을 파일의 파일객체
+		File f = new File(downFile); 
 		
     //헤더세팅
     response.setHeader("Cache-Control", "no-cache");
