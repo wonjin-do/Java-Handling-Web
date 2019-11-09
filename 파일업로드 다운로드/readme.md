@@ -263,3 +263,94 @@ public class FileDownload extends HttpServlet {
 }
 
 ~~~
+
+# 부록(최범균 JSP 프로그램)
+web.xml
+~~~
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+		http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	version="3.1">
+    <servlet>
+        <servlet-name>UploadServlet</servlet-name>
+        <servlet-class>fileupload.UploadServlet</servlet-class>
+        <multipart-config>
+            <location>C:\practice</location> <--임시파일 경로지정-->
+            <max-file-size>-1</max-file-size>
+            <max-request-size>-1</max-request-size>
+            <file-size-threshold>1024</file-size-threshold>
+        </multipart-config>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>UploadServlet</servlet-name>
+        <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
+
+</web-app>
+
+~~~
+업로드서블릿
+~~~
+package fileupload;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Collection;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+public class UploadServlet extends HttpServlet {
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
+
+		resp.setContentType("text/html; charset=utf-8");
+
+		PrintWriter writer = resp.getWriter();
+		writer.println("<html><body>");
+
+		String contentType = req.getContentType();
+		if (contentType != null
+				&& contentType.toLowerCase().startsWith("multipart/")) {
+			printPartInfo(req, writer);
+		} else {
+			writer.println("multipart가 아님");
+		}
+		writer.println("</body></html>");
+	}
+
+	private void printPartInfo(HttpServletRequest req, PrintWriter writer)
+			throws IOException, ServletException {
+		Collection<Part> parts = req.getParts();
+		for (Part part : parts) {
+			writer.println("<br/> name = " + part.getName());
+			String contentType = part.getContentType();
+			writer.println("<br/> contentType = " + contentType);
+			if (part.getHeader("Content-Disposition").contains("filename=")) {
+				writer.println("<br/> size = " + part.getSize());
+				String fileName = part.getSubmittedFileName();
+				writer.println("<br/> filename = " + fileName);
+				if (part.getSize() > 0) {
+					part.write("c:\\temp\\" + fileName);
+				//	part.delete();
+				}
+			} else {
+				String value = req.getParameter(part.getName());
+				writer.println("<br/> value = " + value);
+			}
+			writer.println("<hr/>");
+		}
+	}
+
+}
+
+~~~
