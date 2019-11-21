@@ -1,0 +1,95 @@
+# JSON객체
+{key : value} 형식을 갖춤. 즉 객체면 중괄호임. { } <br>
+key 자리에는 문자열로 식별자가 자리함. value에는 문자열, 객체 , 배열, 객체배열 모두 올 수 있음.
+
+## 자바스크립트에서 JSON
+문자열 배열
+~~~
+ var jsonStr  = '{"name": ["홍길동", "이순신", "임꺽정"] }';          
+ var jsonInfo = JSON.parse(jsonStr); //제이쿼리에 JSON 클래스의 parse 메소드를 사용하여 JSON객체로 손쉽게 변형한다.
+~~~
+
+정수 배열
+~~~
+ var jsonStr = '{"age": [22, 33, 44]}';  
+ var jsonInfo = JSON.parse(jsonStr);
+~~~
+
+문자열 배열(단, 다양한 key를 갖음)
+~~~
+  var jsonStr = '{"name":"박지성","age":25,"gender":"남자","nickname":"날센돌이"}';
+  var jsonObj = JSON.parse(jsonStr);
+~~~
+
+객체 배열
+~~~
+var jsonStr = '{"members":[{"name":"박지성","age":"25","gender":"남자","nickname":"날센돌이"}'
+	    	               +', {"name":"손흥민","age":"30","gender":"남자","nickname":"탱크"}] }';
+var jsonInfo = JSON.parse(jsonStr);
+~~~
+
+# Java에서 JSON을 사용하기 위한 설정
+## JSON 라이브러리 https://code.google.com/archive/p/json-simple/downloads
+### json-simple-1.1.1.jar 다운 및 lib에 복붙
+1. JSON객체를 생성하고 싶으면 예외처리해줘야함.
+~~~
+private void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		....
+		String jsonInfo = request.getParameter("jsonInfo");
+		try {
+			JSONParser jsonParser = new JSONParser(); //파서객체 생성
+			JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonInfo);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+~~~
+## JSP에서 JSON형식을 갖춘 String을 만들었던 것과 달리 JSON객체를 직접만들수도 있다.
+~~~
+private void doHandle(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter writer = response.getWriter();
+
+		JSONObject totalObject = new JSONObject(); //배열을 value로 하는 JSON {"key" : [  ] }
+		JSONArray membersArray = new JSONArray(); //배열 [ ]
+		JSONObject memberInfo = new JSONObject(); //객체 { }  (배열에 들어갈 요소)
+
+		memberInfo.put("name", "박지성");
+		memberInfo.put("age", "25");
+		memberInfo.put("gender", "남자");
+		memberInfo.put("nickname", "날센돌이"); // memberInfo 는  {"name":"박지성", "age":"25", "gender":"남자", "nickname":"날쎈돌이"}
+        //  배열에 입력
+		membersArray.add(memberInfo); // membersArray 는 [ {"name":"박지성", "age":"25", "gender":"남자", "nickname":"날쎈돌이"} ]
+
+		memberInfo = new JSONObject();
+		memberInfo.put("name", "김연아");
+		memberInfo.put("age", "21");
+		memberInfo.put("gender", "여자");
+		memberInfo.put("nickname", "칼치");
+		membersArray.add(memberInfo);
+        
+    /*
+    membersArray 
+    [
+      {"name":"박지성", "age":"25", "gender":"남자", "nickname":"날쎈돌이"} 
+     ,{"name":"김연아", "age":"21", "gender":"여자", "nickname":"칼치"}  
+    ]
+    */
+		
+    totalObject.put("members", membersArray);
+    
+    /*
+    totalObject
+    {"members"  :  [ { }, { } ] }
+    
+    */
+    
+		String jsonInfo = totalObject.toJSONString();
+		System.out.print(jsonInfo);
+		writer.print(jsonInfo);
+	}
+~~~
+
