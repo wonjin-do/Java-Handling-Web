@@ -47,6 +47,7 @@
 tip)
 <form> 태크의 <input> 에 있는 value들은 무조건 String으로 맵핑되지만 Ajax를 통해 request에 바인딩되는 객체는 Object 타입이므로 반드시 
 형변환을해주어야 한다.
+
 ~~~
 package sec01.ex01;
 
