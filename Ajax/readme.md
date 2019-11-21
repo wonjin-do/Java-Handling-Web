@@ -21,8 +21,15 @@
 ~~~
 
 # 제이쿼리를 이용한 Ajax
-  <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 태그 추가
+## JSON객체가 주고받아지는 것이 아니라 JSON 양식을 띈 String이 주고 받아진다. 받은 후에 JSON으로 변환한다.
+
+
+태그 추가  <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 
 ## 예제1 (Text를 응답받음)
+
+''' data: {param:"Hello,jquery"}''' 
+
+
 ~~~
      function fn_process(){
        $.ajax({
@@ -44,9 +51,8 @@
    }	
 ~~~
 위 코드로 부터 요청을 받게되는 서블릿코드는 아래와 같다.
-tip)
-<form> 태크의 <input> 에 있는 value들은 무조건 String으로 맵핑되지만 Ajax를 통해 request에 바인딩되는 객체는 Object 타입이므로 반드시 
-형변환을해주어야 한다.
+
+### tip) <form> 태크의 <input> 에 있는 value들은 무조건 String으로 맵핑되지만 Ajax를 통해 request에 바인딩되는 객체는 Object 타입이므로 반드시 형변환 (String) 을해주어야 한다.
 
 ~~~
 package sec01.ex01;
@@ -86,12 +92,8 @@ public class AjaxTest1 extends HttpServlet {
 	private void doHandler(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
-		
-    /*
-    <form> 태크의 <input> 에 있는 value들은 무조건 String으로 맵핑되지만 Ajax를 통해 request에 바인딩되는 객체는 Object 타입이므로 반드시 
-    형변환을해주어야 한다.
-    */
-    String param = (String) request.getParameter("param");
+
+`		String param = (String) request.getParameter("param");
 		System.out.println("param = " + param);
 		PrintWriter writer = response.getWriter();
 		writer.print("안녕하세요.서버입니다.");
