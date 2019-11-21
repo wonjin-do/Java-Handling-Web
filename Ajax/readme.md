@@ -27,9 +27,7 @@
 태그 추가  <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 
 ## 예제1 (Text를 응답받음)
 
-''' data: {param:"Hello,jquery"}''' 
-
-
+``` data: {param:"Hello,jquery"} ``` 형식을 보면 {key : String} 이며 이것이 표준이다.
 ~~~
      function fn_process(){
        $.ajax({
@@ -104,53 +102,7 @@ public class AjaxTest1 extends HttpServlet {
 ~~~
 
 ## 예제2 (XML을 응답받음)
-
-~~~
-<!DOCTYPE html>
-<html>
-<head>
-   <meta charset="UTF-8">
-   <title>도서 정보 출력창</title>
-   <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-   <script type="text/javascript">
-      function fn_process(){
-        $.ajax({
-            
-            type:"post",
-            async:false, 
-            url:"http://localhost:8090/pro16/ajaxTest2",
-            dataType:"xml",
-            
-            success:function (info,textStatus){
-              $(info).find("book").each(function(){  //info 라는 xml 데이터에서 book태그 요소선택
-	              var title=$(this).find("title").text();
-	              var writer=$(this).find("writer").text();
-	              var image=$(this).find("image").text();
-	              $("#bookInfo").append(
-	                  	"<p>" +title+ "</p>" +
-		                "<p>" +writer + "</p>"+
-	 	                "<img src="+image + "   />"				
-	              );
-              });
-            },
-            error:function(data,textStatus){
-               alert("에러가 발생했습니다.");ㅣ
-            },
-            complete:function(data,textStatus){
-               //alert("작업을완료 했습니다");
-            }
-       }); 
-     }
-  </script>
-</head>
-<body>
-<div id="bookInfo"></div>
-<input type=button value="도서정보 요청"  onclick="fn_process()">
-</body>
-</html>
-
-~~~
-
+요청시 xml 양식이 갖춰진 text 전송.
 ~~~
 package sec01.ex01;
 
@@ -209,4 +161,50 @@ public class AjaxTest2 extends HttpServlet {
 
 ~~~
 
-## 예제3 
+### Ajax로 요청및 xml받아오기
+응답받을 데이터타입 dataType을 정해주면 그 Type의 데이터가 응답받아짐. 즉, 항상 String은 아니란 말씀!
+~~~
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+   <title>도서 정보 출력창</title>
+   <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+   <script type="text/javascript">
+      function fn_process(){
+        $.ajax({
+            
+            type:"post",
+            async:false, 
+            url:"http://localhost:8090/pro16/ajaxTest2",
+            dataType:"xml",
+            
+            success:function (info,textStatus){
+              $(info).find("book").each(function(){  //info 라는 xml 데이터에서 book태그 요소선택
+	              var title=$(this).find("title").text();
+	              var writer=$(this).find("writer").text();
+	              var image=$(this).find("image").text();
+	              $("#bookInfo").append(
+	                  	"<p>" +title+ "</p>" +
+		                "<p>" +writer + "</p>"+
+	 	                "<img src="+image + "   />"				
+	              );
+              });
+            },
+            error:function(data,textStatus){
+               alert("에러가 발생했습니다.");ㅣ
+            },
+            complete:function(data,textStatus){
+               //alert("작업을완료 했습니다");
+            }
+       }); 
+     }
+  </script>
+</head>
+<body>
+<div id="bookInfo"></div>
+<input type=button value="도서정보 요청"  onclick="fn_process()">
+</body>
+</html>
+
+~~~
