@@ -99,7 +99,7 @@ public class FileUpload extends HttpServlet {
 					if (fileItem.isFormField()) {
 						System.out.println(fileItem.getFieldName() + "=" + fileItem.getString(encoding));
 					} 
-          else {
+				   	else {
 						System.out.println("파라미터명:" + fileItem.getFieldName());
 						System.out.println("파일명:" + fileItem.getName());
 						System.out.println("파일크기:" + fileItem.getSize() + "bytes");
@@ -123,6 +123,10 @@ public class FileUpload extends HttpServlet {
 }
 
 ~~~
+
+
+
+
 # 파일다운로드
 
 first.jsp
