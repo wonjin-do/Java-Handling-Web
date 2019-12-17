@@ -37,6 +37,47 @@ webApplication Name(줄여서 app으로 표기)
                      ┗ web.xml     // 배치 지시자(deployment decriptor)로서 일종의 환경설정파일
 ~~~
 
+## JSP 개발환경에서의 구조
+~~~
+project Name
+       ┗ java Resources
+       ┃      ┗ src
+       ┃      ┗ Libraies
+       ┃            ┗ JRE System Library[JavaSE-1.8]
+       ┃            ┗ Web App Libraries
+       ┃                    ┗ commons-dbcp.jar
+       ┃                    ┗ commons-logging.jar
+       ┃                    ┗ commons-pool.jar
+       ┃                    ┗ mysql-connector.jar
+       ┗ javaScript Resources
+       ┗ build
+       ┗ WebContent
+              ┗ META-INF
+              ┗ WEB-INF
+                  ┗ lib
+              ┗ web.xml
+~~~
+
+## 스프링 프레임워크 개발환경에서의 구조
+~~~
+project Name
+       ┗ src
+       ┃  ┗ main  
+       ┃  ┃   ┗ java
+       ┃  ┃   ┗ resource
+       ┃  ┃   ┗ WEB-INF            // 외부에서 접근 불가능
+       ┃  ┃         ┗ classes     // 서블릿, 클래스
+       ┃  ┃         ┗ config
+       ┃  ┃         ┃    ┗ presentation-layer.xml
+       ┃  ┃         ┗ web.xml     // 배치 지시자(deployment decriptor)로서 일종의 환경설정파일
+       ┃  ┗ test
+       ┃      ┗ java
+       ┃      ┗ resource
+       ┃             ┗ applicationContext.xml
+       ┗ Maven Dependencies
+       ┗ pom.xml
+~~~
+
 ## 수동배포
 ### CATALINA_HOME 이란?
 JDK의 루트디렉토리를 JAVA_HOME이라고 부른것 처럼 <br>
