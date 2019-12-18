@@ -33,7 +33,8 @@ Help > install New software > add > Name : exERD , Location : http://exerd.com/u
 설치를 마치고 나면 File > New > others 이후 eXERD 폴더가 보이면 정상
 
 # 톰캣서버에 배포하기
-https://jang8584.tistory.com/72 알찬 정보들 많네~
+## 톰캣서버 기본구조
+내용이 너무 많아서 다음 블로그 참고 https://jang8584.tistory.com/72 알찬 정보들 많네~
 ## 웹어플리케이션 기본 구조
 ~~~
 webApplication Name(줄여서 app으로 표기)
