@@ -1,5 +1,5 @@
-1.자바스크립트에서의 JSON(##자바스크립트에서_JSON) <br>
-2.자바에서의 JSON(#Java에서_JSON만들기) <br>
+[자바스크립트에서의 JSON](#자바스크립트에서_JSON) <br>
+[자바에서의 JSON](#Java에서_JSON만들기) <br>
 
 # JSON객체
 {key : value} 형식을 갖춤. 즉 객체면 중괄호임. { } <br>
