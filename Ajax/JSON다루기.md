@@ -5,7 +5,7 @@
 {key : value} 형식을 갖춤. 즉 객체면 중괄호임. { } <br>
 key 자리에는 문자열로 식별자가 자리함. value에는 문자열, 객체 , 배열, 객체배열 모두 올 수 있음.
 
-## 자바스크립트에서 JSON
+## 자바스크립트에서_JSON
 문자열 배열
 ~~~javascript
  var jsonStr  = '{"name": ["홍길동", "이순신", "임꺽정"] }';          
@@ -31,7 +31,7 @@ var jsonStr = '{"members":[{"name":"박지성","age":"25","gender":"남자","nic
 var jsonInfo = JSON.parse(jsonStr);
 ~~~
 
-# Java에서 JSON만들기
+# Java에서_JSON만들기
 JSON 라이브러리 https://code.google.com/archive/p/json-simple/downloads<br>
 json-simple-1.1.1.jar 다운 및 lib에 복붙
 ## Sting -> JSON객체  (예외처리해야함)
