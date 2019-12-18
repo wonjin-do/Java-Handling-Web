@@ -1,20 +1,27 @@
 # 자바 웹을 다루는 기술
 
-[1.JDK 10 설치](#JDK-10-설치)
-[1.톰캣서버에 배포하기](#톰캣서버에-배포하기)
+[톰캣](#톰캣)
+[DataBase](#DataBase)
+[웹어플리케이션_폴더_구조](#웹어플리케이션_폴더_구조)
+[개발환경_폴더구조](#개발환경_폴더구조)
+[수동배포와 컨택스트의 의미](#수동배포)
 
 ## 개발을 하고 싶어요
 ## Coding을 잘하고 싶어요
 
 # JDK 10 설치
 
-# 톰캣설치
+# 톰캣
 ## tomcat 9 
+
 Core > Windows Service Installer > 기본설정으로 next버튼 누르며 설치<br>
 tomcat 8(이전버전)을 삭제하고 싶을 땐 cmd창에 
 ~~~
 sc delete Tomcat8
 ~~~
+## 톰캣서버 기본구조
+내용이 너무 많아서 다음 블로그 참고 https://jang8584.tistory.com/72 <br>
+
 가상의 WAS를 통하여 개발이 진행됨. 이클립스는 실제 설치된 톰캣을 Server 설정을 통해 연동한 경우 런타임 환경만 실제 톰캣의 것을 사용하며 배포 경로는 가상의 경로를 이용합니다.<br>
 tmp0은 이클립스 servers 뷰에서 보이는 서버의 index같은 것입니다.
 이클립스에 server를 여러개 만드는 경우 tmp0, tmp1 식으로 여러개의 서버가 생성됩니다.
@@ -38,10 +45,7 @@ workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps
 Help > install New software > add > Name : exERD , Location : http://exerd.com/update <br>
 설치를 마치고 나면 File > New > others 이후 eXERD 폴더가 보이면 정상
 
-# 톰캣서버에 배포하기
-## 톰캣서버 기본구조
-내용이 너무 많아서 다음 블로그 참고 https://jang8584.tistory.com/72 
-## 웹어플리케이션 기본 구조
+## 웹어플리케이션_폴더_구조
 ~~~
 webApplication Name(줄여서 app으로 표기)
               ┗ WEB-INF            // 외부에서 접근 불가능
@@ -53,7 +57,8 @@ webApplication Name(줄여서 app으로 표기)
                      ┗ web.xml     // 배치 지시자(deployment decriptor)로서 일종의 환경설정파일
 ~~~
 
-## JSP 개발환경에서의 구조
+## 개발환경_폴더구조
+### JSP_개발환경에서의_구조
 ~~~
 project Name
        ┗ java Resources
@@ -74,7 +79,7 @@ project Name
               ┗ web.xml
 ~~~
 
-## 스프링 프레임워크 개발환경에서의 구조
+### 스프링 프레임워크_개발환경에서의_구조
 ~~~
 project Name
        ┗ src
