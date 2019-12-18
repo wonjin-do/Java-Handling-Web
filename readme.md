@@ -5,6 +5,7 @@
 [웹어플리케이션_폴더_구조](#웹어플리케이션_폴더_구조)<br>
 [개발환경_폴더구조](#개발환경_폴더구조)<br>
 [수동배포와 컨택스트의 의미](#수동배포)<br>
+[★★★배포에 필요한 빌드개념★★★](#빌드용어)
 
 ## 개발을 하고 싶어요
 ## Coding을 잘하고 싶어요
@@ -135,6 +136,12 @@ C:/tomcat9/             // CATALINA_HOME
 <Context path="/컨텍스트 이름 명명" docBase="웹 어플리케이션 실제경로" reloadable="true"/>
 ~~~
 를 달아준다.
+
+# 빌드용어
+##.java -> .class -> jar/war 
+java 에서 class로 컴파일(반기계어), 문법오류체크, 주석제거 
+https://www.youtube.com/watch?v=JgRCaVwkPE8
+
 
 
 
