@@ -27,8 +27,9 @@
 태그 추가  <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 
 ## 예제1 (Text를 응답받음)
 
-``` data: {param:"Hello,jquery"} ``` 형식을 보면 {key : String} 이며 이것이 표준이다.
-~~~
+```javascript
+data: {param:"Hello,jquery"} ``` 형식을 보면 {key : String} 이며 이것이 표준이다.
+~~~javascript
      function fn_process(){
        $.ajax({
          type:"get",
@@ -52,7 +53,7 @@
 
 ### tip) <form> 태크의 <input> 에 있는 value들은 무조건 String으로 맵핑되지만 Ajax를 통해 request에 바인딩되는 객체는 Object 타입이므로 반드시 형변환 (String) 을해주어야 한다.
 
-~~~
+~~~java
 package sec01.ex01;
 
 import java.io.IOException;
@@ -103,7 +104,7 @@ public class AjaxTest1 extends HttpServlet {
 
 ## 예제2 (XML을 응답받음)
 요청시 xml 양식이 갖춰진 text 전송.
-~~~
+~~~java
 package sec01.ex01;
 
 import java.io.IOException;
@@ -163,7 +164,7 @@ public class AjaxTest2 extends HttpServlet {
 
 ### Ajax로 요청및 xml받아오기
 응답받을 데이터타입 dataType을 정해주면 그 Type의 데이터가 응답받아짐. 즉, 항상 String은 아니란 말씀!
-~~~
+~~~html
 <!DOCTYPE html>
 <html>
 <head>
