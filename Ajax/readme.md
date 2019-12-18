@@ -1,5 +1,5 @@
 # 순수 JavaScript를 이용한 Ajax
-~~~
+~~~javascript
   function buttonClicked(){
  		      	
              //ajax..
