@@ -35,6 +35,12 @@ var jsonInfo = JSON.parse(jsonStr);
 JSON 라이브러리 https://code.google.com/archive/p/json-simple/downloads<br>
 json-simple-1.1.1.jar 다운 및 lib에 복붙
 ## Sting -> JSON객체  (예외처리해야함)
+~~~java
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+~~~
 이때, 문자열은 " "로 감싸고 내부의 key,value도 \"로 감싸준다.
 ~~~java
 private void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,8 +48,7 @@ private void doHandle(HttpServletRequest request, HttpServletResponse response) 
 		String jsonString = "{\"name\":\"박지성\",\"age\":\"25\"}";
 		try {
 			JSONParser jsonParser = new JSONParser(); //파서객체 생성
-			JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonInfo);
-		
+			JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonInfo);//형변환 필수
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -65,7 +70,7 @@ private void doHandle(HttpServletRequest request, HttpServletResponse response)
 		memberInfo.put("age", "25");
 		memberInfo.put("gender", "남자");
 		memberInfo.put("nickname", "날센돌이"); // memberInfo 는  {"name":"박지성", "age":"25", "gender":"남자", "nickname":"날쎈돌이"}
-        //  배열에 입력
+		//  배열에 입력
 		membersArray.add(memberInfo); // membersArray 는 [ {"name":"박지성", "age":"25", "gender":"남자", "nickname":"날쎈돌이"} ]
 
 		memberInfo = new JSONObject();
@@ -83,4 +88,13 @@ private void doHandle(HttpServletRequest request, HttpServletResponse response)
 		writer.print(jsonInfo);
 	}
 ~~~
+# JSONArray (JSON이라기 보다 Array에 가깝다)
+[ {"name":"박지성", "age":"25", "gender":"남자", "nickname":"날쎈돌이"} 
+       ,{"name":"김연아", "age":"21", "gender":"여자", "nickname":"칼치"} ]<br>
+# JSONObject
+위 JSONArray를 브라우저에게 전송하고 싶다면 최종형태는 대괄호 [ 와 ] 가 아닌 {key : value} 형태로 만들어줘야 한다.
+jsonObject.put("key", JSONArray);로 JSONObject로 만든다.
 
+# JSONObject의 toJSONString() 메소드를 이용해 String으로 변환한다.
+String jsonInfo = jsonObject.toJSONString();
+writer.print(jsonInfo);
