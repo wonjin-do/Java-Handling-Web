@@ -27,8 +27,10 @@
 태그 추가  <script  src="http://code.jquery.com/jquery-latest.min.js"></script> 
 ## 예제1 (Text를 응답받음)
 
-```javascript
-data: {param:"Hello,jquery"} ``` 형식을 보면 {key : String} 이며 이것이 표준이다.
+```
+data: {param:"Hello,jquery"}
+```
+형식을 보면 {key : String} 이며 이것이 표준이다.
 ~~~javascript
      function fn_process(){
        $.ajax({
