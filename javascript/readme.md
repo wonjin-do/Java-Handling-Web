@@ -17,4 +17,3 @@ $(document).ready(function(){
 ```javascript
 window.onload = function(){};
 ```
-
