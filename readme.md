@@ -1,5 +1,11 @@
 # 자바 웹을 다루는 기술
 
+[1.JDK 10 설치](#JDK-10-설치)
+[1.톰캣서버에 배포하기](#톰캣서버에-배포하기)
+
+## 개발을 하고 싶어요
+## Coding을 잘하고 싶어요
+
 # JDK 10 설치
 
 # 톰캣설치
@@ -34,7 +40,7 @@ Help > install New software > add > Name : exERD , Location : http://exerd.com/u
 
 # 톰캣서버에 배포하기
 ## 톰캣서버 기본구조
-내용이 너무 많아서 다음 블로그 참고 https://jang8584.tistory.com/72 알찬 정보들 많네~
+내용이 너무 많아서 다음 블로그 참고 https://jang8584.tistory.com/72 
 ## 웹어플리케이션 기본 구조
 ~~~
 webApplication Name(줄여서 app으로 표기)
