@@ -1,5 +1,5 @@
-1.자바스크립트에서의 JSON(#자바스크립트에서_JSON) <br>
-2.자바에서의 JSON(#Java에서_JSON) <br>
+1.자바스크립트에서의 JSON(##자바스크립트에서_JSON) <br>
+2.자바에서의 JSON(#Java에서_JSON만들기) <br>
 
 # JSON객체
 {key : value} 형식을 갖춤. 즉 객체면 중괄호임. { } <br>
@@ -35,7 +35,7 @@ var jsonInfo = JSON.parse(jsonStr);
 JSON 라이브러리 https://code.google.com/archive/p/json-simple/downloads<br>
 json-simple-1.1.1.jar 다운 및 lib에 복붙
 ## Sting -> JSON객체  (예외처리해야함)
-### 이때, 문자열은 " "로 감싸고 내부의 key,value도 \"로 감싸준다.
+이때, 문자열은 " "로 감싸고 내부의 key,value도 \"로 감싸준다.
 ~~~java
 private void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		....
