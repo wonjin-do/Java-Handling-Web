@@ -3,7 +3,7 @@
 [인코딩 설정](#인코딩)<br>
 [서블릿_DB연동하기](#서블릿_DB연동하기)<br>
 [톰캣_에러](#톰캣_에러)<br>
-[url경로 지정방식](#url경로 지정방식)<br>
+[url경로 지정방식](#url경로_지정방식)<br>
 
 <hr>
 
@@ -250,7 +250,7 @@ Server Tomcat v8.5 Server at localhost failed to start.<br>
 해결책<br>
 tomcat Overview창에서 "Publish module contexts to separate XML files" 체크해준다.<br>
 
-## url경로 지정방식
+## url경로_지정방식
 ~~~
 p.251 
 MemberServlet.java
