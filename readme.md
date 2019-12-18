@@ -9,6 +9,15 @@ tomcat 8(이전버전)을 삭제하고 싶을 땐 cmd창에
 ~~~
 sc delete Tomcat8
 ~~~
+가상의 WAS를 통하여 개발이 진행됨. 이클립스는 실제 설치된 톰캣을 Server 설정을 통해 연동한 경우 런타임 환경만 실제 톰캣의 것을 사용하며 배포 경로는 가상의 경로를 이용합니다.<br>
+tmp0은 이클립스 servers 뷰에서 보이는 서버의 index같은 것입니다.
+이클립스에 server를 여러개 만드는 경우 tmp0, tmp1 식으로 여러개의 서버가 생성됩니다.
+
+```
+workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps
+
+```
+
 
 # DataBase
 ## 사용자 생성 / 권한부여
