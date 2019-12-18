@@ -1,8 +1,13 @@
 
+[서블릿API_계층구조](#서블릿API_계층구조)<br>
+[인코딩 설정](#인코딩)<br>
+[서블릿_DB연동하기](#서블릿_DB연동하기)<br>
+[톰캣_에러](#톰캣_에러)<br>
+[url경로 지정방식](#url경로 지정방식)<br>
 
-# 아래 DataBase 설정 설명있음.
+<hr>
 
-# 서블릿API 계층구조
+# 서블릿API_계층구조
 ~~~
 Servlet  ServletConfig   // 인터페이스
     \     /
@@ -28,16 +33,18 @@ tomcat
 
 
     
-## 서블릿 요청데이터 인코딩 설정 / 응답데이터 contentType 설정
-요청데이터 : request.setCharacterEncoding("utf-8"); //인코딩 설정
-응답데이터 : response.setContentType("text/html;charset=utf-8"); //응답데이터의 데이터타입(MIME-TYPE)
+## 인코딩
+서블릿 요청데이터 인코딩 설정 / 응답데이터 contentType 설정<br>
+요청데이터 : request.setCharacterEncoding("utf-8"); //인코딩 설정<br>
+응답데이터 : response.setContentType("text/html;charset=utf-8"); //응답데이터의 데이터타입(MIME-TYPE)<br>
 
 ### 응답데이터의 데이터 타입(MIME)을 설정해주는 이유
 : 브라우저가 전송받을 데이터의 타입을 알고 있으면 빠르게 처리할 수 있기 때문.
 따라서, 톰켓 컨테이너가 미리 제공하는 데이터 타입중 하나를 지정해서 브라우저로 전송함.
 미리 제공하는 데이터타입은 MIME-TYPE이라고 함. text/html , text/plain, application/xml 등이 있으며 그 외는 CATALINA_HOME/conf/web.xml에 추가하여 사용가능함.
 
-## 서블릿 DB연동하기
+## 서블릿_DB연동하기
+
 ~~~
 create table t_member(
 id varchar2(10) primary key,
@@ -56,16 +63,17 @@ select *from t_member;
 ~~~
 
 ### JDBC
+JDBC는 ODBC의 영향을 받아서 만들어졌습니다. ODBC란 Window 환경에서 데이터베이스 연동을 위해 제공되는 단일한 프로그래밍 인터페이스입니다. 물론 JABA에서 JDBC 없이 DB 프로그래밍을 할 수 있습니다. 단, native c 코드를 사용해야 하므로 무척 번거롭기 때문에 JDBC를 사용하는 경우가 대부분입니다.
+<hr>
 오라클DB --- WAS 연동에 필요한 드라이버 ojdbc6.jar를
 프로젝트의 /WebContent/WEB-INF/lib 폴더에 복사하여 붙여 넣는다.
 ojdbc.jar은 다음 링크를 통해 다운받는다.
-https://www.oracle.com/technetwork/apps-tech/jdbc-112010-090769.html
+Oracle https://www.oracle.com/technetwork/apps-tech/jdbc-112010-090769.html
 
-Mysql
-https://dev.mysql.com/downloads/connector/j/
+Mysql https://dev.mysql.com/downloads/connector/j/
 
 
-~~~
+~~~java
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -154,7 +162,7 @@ JNDI란 (Java Naming and Directory Interface) key : value로 설정정보를 가
 톰캣실행 시 연결할 데이터베이스 설정정보를 /context.xml에 입력한다.
 
 사용법은 아래와 같다.
-~~~
+~~~java
 package sec02.ex01;
 
 import java.sql.Connection;
@@ -236,10 +244,7 @@ public class MemberDAO {
 	}*/
 }
 ~~~
-
-
-
-
+# 톰캣_에러
 톰캣실행에러<br>
 Server Tomcat v8.5 Server at localhost failed to start.<br>
 해결책<br>
