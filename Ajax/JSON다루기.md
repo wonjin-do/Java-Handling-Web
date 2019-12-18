@@ -34,7 +34,7 @@ var jsonInfo = JSON.parse(jsonStr);
 # Java에서_JSON만들기
 JSON 라이브러리 https://code.google.com/archive/p/json-simple/downloads<br>
 json-simple-1.1.1.jar 다운 및 lib에 복붙
-## Sting -> JSON객체  (예외처리해야함)
+## 방법1) Sting -> JSON객체  (예외처리해야함)
 ~~~java
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -54,7 +54,7 @@ private void doHandle(HttpServletRequest request, HttpServletResponse response) 
 		}
 	}
 ~~~
-## 직접 JSON객체생성
+## 방법2) 직접 JSON객체생성
 ~~~java
 private void doHandle(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
