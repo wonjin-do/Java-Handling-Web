@@ -1,3 +1,6 @@
+1.자바스크립트에서의 JSON(#자바스크립트에서_JSON) <br>
+2.자바에서의 JSON(#Java에서_JSON) <br>
+
 # JSON객체
 {key : value} 형식을 갖춤. 즉 객체면 중괄호임. { } <br>
 key 자리에는 문자열로 식별자가 자리함. value에는 문자열, 객체 , 배열, 객체배열 모두 올 수 있음.
@@ -28,14 +31,15 @@ var jsonStr = '{"members":[{"name":"박지성","age":"25","gender":"남자","nic
 var jsonInfo = JSON.parse(jsonStr);
 ~~~
 
-# Java에서 JSON을 사용하기 위한 설정
-## JSON 라이브러리 https://code.google.com/archive/p/json-simple/downloads
-### json-simple-1.1.1.jar 다운 및 lib에 복붙
-1. JSON객체를 생성하고 싶으면 예외처리해줘야함.
+# Java에서 JSON만들기
+JSON 라이브러리 https://code.google.com/archive/p/json-simple/downloads<br>
+json-simple-1.1.1.jar 다운 및 lib에 복붙
+## Sting -> JSON객체  (예외처리해야함)
+### 이때, 문자열은 " "로 감싸고 내부의 key,value도 \"로 감싸준다.
 ~~~java
 private void doHandle(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		....
-		String jsonInfo = request.getParameter("jsonInfo");
+		String jsonString = "{\"name\":\"박지성\",\"age\":\"25\"}";
 		try {
 			JSONParser jsonParser = new JSONParser(); //파서객체 생성
 			JSONObject jsonObject = (JSONObject) jsonParser.parse(jsonInfo);
@@ -45,7 +49,7 @@ private void doHandle(HttpServletRequest request, HttpServletResponse response) 
 		}
 	}
 ~~~
-## JSP에서 JSON형식을 갖춘 String을 만들었던 것과 달리 JSON객체를 직접만들수도 있다.
+## 직접 JSON객체생성
 ~~~java
 private void doHandle(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -69,24 +73,11 @@ private void doHandle(HttpServletRequest request, HttpServletResponse response)
 		memberInfo.put("age", "21");
 		memberInfo.put("gender", "여자");
 		memberInfo.put("nickname", "칼치");
-		membersArray.add(memberInfo);
-        
-    /*
-    membersArray 
-    [
-      {"name":"박지성", "age":"25", "gender":"남자", "nickname":"날쎈돌이"} 
-     ,{"name":"김연아", "age":"21", "gender":"여자", "nickname":"칼치"}  
-    ]
-    */
+		membersArray.add(memberInfo);  
+    /*[ {"name":"박지성", "age":"25", "gender":"남자", "nickname":"날쎈돌이"} 
+       ,{"name":"김연아", "age":"21", "gender":"여자", "nickname":"칼치"} ] */
 		
-    totalObject.put("members", membersArray);
-    
-    /*
-    totalObject
-    {"members"  :  [ { }, { } ] }
-    
-    */
-    
+		totalObject.put("members", membersArray); //{"members": [ { }, { } ]}
 		String jsonInfo = totalObject.toJSONString();
 		System.out.print(jsonInfo);
 		writer.print(jsonInfo);
