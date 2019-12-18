@@ -1,7 +1,11 @@
+[URL분석](#URL분석)<br>
+[ServletContext & ServletConfig 사용법](#ServletContext_&_ServletConfig_사용법)<br>
+[HttpSessionBindingListener를 이용한 로그인 접속자수 표시](#HttpSessionBindingListener를_이용한_로그인_접속자수_표시)<br>
 
 Q. Servlet생성할 때, next 눌러서 체크란에 ingerited abstract methods가 체크되어 있는데 기본으로... 왜그런거임?
 
-# localhost:8090/pro10/first/base 분석
+# URL분석
+## url : localhost:8090/pro10/first/base
 ### contextPath) request.getContext(); 
 /pro10
 ### URL) request.getRequestURL().toString();
@@ -47,12 +51,12 @@ dis.forward(req, res);
     ┗ ...
 ~~~
 따라서, 단일 웹어플리케이션내에서 모든 사용자가 공통으로 사용하는 데이터는 ServletContext에 바인딩해서 사용할것.
-~~~
+~~~java
 //A.java
 ServletContext context = getServletContext();
 context.setAttribute("name", object);
 ~~~
-~~~
+~~~java
 //B.java
 ServletContext context = getServletContext();
 Object obj = (형변환)getAttribute("name");
@@ -60,7 +64,7 @@ Object obj = (형변환)getAttribute("name");
 
 ### ServletContext 의 초기화 파라미터 기능<br>
 /WEB-INF/web.xml
-~~~
+~~~xml
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app ...>
 	<context-param>
@@ -78,7 +82,7 @@ Object obj = (형변환)getAttribute("name");
 </web-app>
 ~~~
 java소스
-~~~
+~~~java
  ServletContext context = getServletContext();
  String menu_member = context.getInitParameter("menu_member"); // menu_member는 어플리케이션 공용으로 쓰이는 초기화 값임.
 ~~~
@@ -88,7 +92,7 @@ java소스
 회원등록 회원조회 회원수정, 주문조회 주문수정 주문취소, 상품조회 상품등록 상품수정 상품삭제
 ~~~
 java소스파일
-~~~
+~~~java
 ServletContext context = getServletContext();
 		InputStream is = context.getResourceAsStream("/WEB-INF/bin/init.txt");
 		BufferedReader buffer = new BufferedReader(new InputStreamReader(is));
@@ -120,7 +124,7 @@ Servlet  ServletConfig   // 인터페이스
 ### urlPattern과 InitParameter 지정가능
 이클립스에서 servlet을 생성할 때 urlPattern과 서블릿초기화파라미터를 지정할 수 있다.
 물론 이 방법은 web.xml로 가능하다. 최범균의 JSP프로그래밍 p.536 (지금은 잘 안쓰는 방법)
-~~~
+~~~java
 @WebServlet(name="initParamServlet",
         urlPatterns = { "/sInit", "/sInit2" }, initParams = {
 		@WebInitParam(name = "email", value = "admin@jweb.com"), 
@@ -143,7 +147,7 @@ public class InitParamServlet extends HttpServlet {
 loadOnStartUp은 web.xml에서도 가능함.(지금은 잘 안쓰는 방법)
 ServletContext객체를 얻을 땐, init 메소드의 ServletConfig객체 파라미터를 이용한다.
 
-~~~
+~~~java
 @WebServlet(name = "loadConfig", urlPatterns = { "/loadConfig"},loadOnStartup=1)
 //@WebServlet(name = "loadConfig", urlPatterns = { "/loadConfig"})
 public class LoadAppConfig extends HttpServlet {
@@ -163,9 +167,9 @@ public class LoadAppConfig extends HttpServlet {
 }
 ~~~
 
-# HttpSessionBindingListener 를 이용한 로그인 접속자수 표시
+# HttpSessionBindingListener를 이용한 로그인 접속자수 표시
 HttpSessinoBindingListener 인터페이스를 구현한 클래스의 객체는 Session에 바인딩 / 언바인딩 될 때 이벤트메소드가 실행된다.
-~~~
+~~~java
 package sec04.ex01;
 
 import javax.servlet.http.HttpSessionBindingEvent;
@@ -200,7 +204,7 @@ public class LoginImpl implements HttpSessionBindingListener {
 ~~~
 
 HttpServlet
-~~~
+~~~java
 package sec04.ex01;
 
 import java.io.IOException;
@@ -256,7 +260,7 @@ public class LoginTest extends HttpServlet {
 ~~~
 
 # HttpSessionListener를 이용한 접속자수 , 접속자 아이디 표시하기
-~~~
+~~~java
 package sec04.ex02;
 
 import javax.servlet.annotation.WebListener;
@@ -296,7 +300,7 @@ public class LoginImpl implements HttpSessionListener {
 }
 ~~~
 로그인 서블릿
-~~~
+~~~java
 package sec04.ex02;
 
 import java.io.IOException;
@@ -360,7 +364,7 @@ public class LoginTest extends HttpServlet {
 
 ~~~
 로그아웃 서블릿
-~~~
+~~~java
 package sec04.ex02;
 
 import java.io.IOException;
