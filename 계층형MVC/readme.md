@@ -1,3 +1,16 @@
+# 계층형 sql (sqldeveloper)
+SELECT LEVEL,
+    articleNO,
+    parentNO ,
+    LPAD(' ', 4*(LEVEL-1)) || title title,
+    content,
+    writeDate,
+    id
+    FROM t_board
+    START WITH parentNO = 0 //부모글 번호를 기준으로 계층형구조를 만든다는 의미임
+    CONNECT BY PRIOR articleNO=parentNO //
+    ORDER SIBLINGS BY articleNO DESC; // 게시글 번호를 기준으로 내림차순
+
 # 계층형 게시판 p.708
 DAO.java
 ~~~
