@@ -87,6 +87,9 @@ project Name
        ┃  ┗ main  
        ┃  ┃   ┗ java
        ┃  ┃   ┗ resource
+       ┃  ┃         ┗ applicationContext.xml
+       ┃  ┃         ┗ config
+       ┃  ┃              ┗ database.properties
        ┃  ┃   ┗ WEB-INF            // 외부에서 접근 불가능
        ┃  ┃         ┗ classes     // 서블릿, 클래스
        ┃  ┃         ┗ config
@@ -95,7 +98,7 @@ project Name
        ┃  ┗ test
        ┃      ┗ java
        ┃      ┗ resource
-       ┃             ┗ applicationContext.xml
+       ┃            
        ┗ Maven Dependencies
        ┗ pom.xml
 ~~~
