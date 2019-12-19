@@ -43,6 +43,7 @@ workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps
 1. 내컴퓨터>우클릭_관리>서비스및응용프로그램>서비스> OracleServiceXE, OracleXTNSListner를 수동으로 설정.
 
 ## DataSource설정하기
+### 방법1) server측
 Server의 context.xml<br>
 ~~~xml
     <!-- Uncomment this to disable session persistence across Tomcat restarts -->
@@ -131,6 +132,75 @@ public class MemberDAO {
 	*/
 	
 }
+~~~
+### 방법2) 웹어플리케이션 측
+~~~xml
+<bean  id="propertyConfigurer"
+      class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" >
+      <property name="locations" >
+         <list>
+            <value>/WEB-INF/config/jdbc.properties</value>
+         </list>
+      </property>
+   </bean>
+    <bean id="dataSource"
+		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass"
+			value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+	
+   <bean  id="memberDAO"   class="com.spring.member.dao.MemberDAOImpl" >
+      <property name="dataSource" ref="dataSource"  />
+   </bean> 
+~~~
+~~~java
+public class MemberDAOImpl implements MemberDAO {
+	private JdbcTemplate jdbcTemplate;
+	public void setDataSource(DataSource dataSource) {
+		this.jdbcTemplate = new JdbcTemplate(dataSource);
+	}
+
+	@Override
+	public List selectAllMembers() throws DataAccessException {
+		String query = "select id,pwd,name,email,joinDate" + " from t_member " + " order by joinDate desc";
+		List membersList = new ArrayList();
+
+		membersList = this.jdbcTemplate.query(query, new RowMapper() {
+			public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+				MemberVO memberVO = new MemberVO();
+				memberVO.setId(rs.getString("id"));
+				memberVO.setPwd(rs.getString("pwd"));
+				memberVO.setName(rs.getString("name"));
+				memberVO.setEmail(rs.getString("email"));
+				memberVO.setJoinDate(rs.getDate("joinDate"));
+				return memberVO;
+			}
+		});
+		return membersList;
+	}
+
+	@Override
+	public int addMember(MemberVO memberVO) throws DataAccessException {
+		String id = memberVO.getId();
+		String pwd = memberVO.getPwd();
+		String name = memberVO.getName();
+		String email = memberVO.getEmail();
+		String query = "insert into t_member(id,pwd, name,email) values  ("
+		                 + "'" + id + "' ,"
+	 	                 + "'" + pwd + "' ,"
+		                 + "'" + name + "' ,"
+		                 + "'" + email + "') ";
+		System.out.println(query);
+		int result = jdbcTemplate.update(query);
+		System.out.println(result);
+		return result;
+	}
+
+}
+
 ~~~
 
 # exERD 를 이클립스에 설치하기
