@@ -5,15 +5,17 @@
 Q. Servlet생성할 때, next 눌러서 체크란에 ingerited abstract methods가 체크되어 있는데 기본으로... 왜그런거임?
 
 # URL분석
-## url : localhost:8090/pro10/first/base
-### contextPath) request.getContext(); 
-/pro10
-### URL) request.getRequestURL().toString();
-http://localhost:8090/pro10/first/base
-### mapping) request.getServletPath();
-/first/base
-### URI) request.getRequestURI();
-/pro10/first/base
+## @webServlet("/fisrt/*") , 요청url : localhost:8090/pro10/first/base
+contextPath) request.getContext(); <br>
+결과: /pro10<br>
+request.getRequestURL().toString();<br>
+결과: http://localhost:8090/pro10/first/base<br>
+request.getServletPath();<br>
+결과: /first/base<br>
+request.getPathInfo();<br>
+결과: /base<br>
+request.getRequestURI();<br>
+결과: /pro10/first/base<br>
 
 # 포워드 기능
 ## redirect / Refresh / location
