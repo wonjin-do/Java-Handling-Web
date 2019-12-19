@@ -7,7 +7,7 @@ https://commons.apache.org/proper/commons-io/download_io.cgi 접속 binaries의 
 압축풀고 commons-io-2.6.jar파일을 이클립스 lib에 복붙<br>
 
 uploadForm.jsp
-~~~
+~~~jsp
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isELIgnored="false" %>
@@ -39,7 +39,7 @@ uploadForm.jsp
 ~~~
 
 FileUpload.java
-~~~
+~~~java
 package sec01.ex01;
 
 import java.io.File;
@@ -130,7 +130,7 @@ public class FileUpload extends HttpServlet {
 # 파일다운로드
 
 first.jsp
-~~~
+~~~jsp
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isELIgnored="false"%>
@@ -156,7 +156,7 @@ first.jsp
 
 ~~~
 result.jsp
-~~~
+~~~jsp
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
     isELIgnored="false"%>
@@ -195,7 +195,7 @@ result.jsp
 FileDownload.java<br>
 output스트림 ( 브라우저로 응답기능)<br>
 fileInput스트림 (프로그램안으로 파일데이터 가져오는 기능)
-~~~
+~~~java
 package sec01.ex02;
 
 import java.io.File;
@@ -270,7 +270,7 @@ public class FileDownload extends HttpServlet {
 
 # 부록(최범균 JSP 프로그램) jsp3.0 이상부터 지원되는 part인터페이스를 이용함.
 web.xml
-~~~
+~~~xml
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -297,7 +297,7 @@ web.xml
 
 ~~~
 업로드서블릿
-~~~
+~~~java
 package fileupload;
 
 import java.io.IOException;
