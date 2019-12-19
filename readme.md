@@ -42,6 +42,97 @@ workspace\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps
 ## DBMS 수동 설정하기
 1. 내컴퓨터>우클릭_관리>서비스및응용프로그램>서비스> OracleServiceXE, OracleXTNSListner를 수동으로 설정.
 
+## DataSource설정하기
+Server의 context.xml<br>
+~~~xml
+    <!-- Uncomment this to disable session persistence across Tomcat restarts -->
+    <!--
+    <Manager pathname="" />
+    -->
+     <Resource
+    	name="jdbc/oracle"         
+    	auth="Container"
+    	type="javax.sql.DataSource"
+    	driverClassName="oracle.jdbc.OracleDriver"
+    	url="jdbc:oracle:thin:@localhost:1521:XE"
+    	username="scott"
+    	password="tiger"
+    	maxActive="50"
+    	maxWait="-1"/>
+~~~
+
+### 소스코드
+~~~java
+public class MemberDAO {
+	/*
+	private static final String driver = "oracle.jdbc.driver.OracleDriver";
+	private static final String url = "jdbc:oracle:thin:@localhost:1521:XE";
+	private static final String user = "scott";
+	private static final String pwd = "tiger";
+	*/
+	
+	private Connection con;
+	private PreparedStatement pstmt;
+	private DataSource dataFactory;
+	
+	public MemberDAO() {
+		try {
+			Context ctx = new InitialContext();
+			Context envContext = (Context) ctx.lookup("java:/comp/env");
+			dataFactory = (DataSource) envContext.lookup("jdbc/oracle");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public List listMembers() {
+		List list = new ArrayList();
+		try {
+			//connDB();
+			con=dataFactory.getConnection();
+			String query = "select * from t_member ";
+			System.out.println("prepareStatememt: " + query);
+			pstmt = con.prepareStatement(query);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				String id = rs.getString("id");
+				String pwd = rs.getString("pwd");
+				String name = rs.getString("name");
+				String email = rs.getString("email");
+				Date joinDate = rs.getDate("joinDate");
+				MemberVO vo = new MemberVO();
+				vo.setId(id);
+				vo.setPwd(pwd);
+				vo.setName(name);
+				vo.setEmail(email);
+				vo.setJoinDate(joinDate);
+				list.add(vo);
+			}
+			rs.close();
+			pstmt.close();
+			con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	/*
+	private void connDB() {
+		try {
+			Class.forName(driver);
+			System.out.println("Oracle 드라이버 로딩 성공");
+			con = DriverManager.getConnection(url, user, pwd);
+			System.out.println("Connection 생성 성공");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	*/
+	
+}
+~~~
+
 # exERD 를 이클립스에 설치하기
 Help > install New software > add > Name : exERD , Location : http://exerd.com/update <br>
 설치를 마치고 나면 File > New > others 이후 eXERD 폴더가 보이면 정상
