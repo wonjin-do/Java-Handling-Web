@@ -134,6 +134,7 @@ public class MemberDAO {
 }
 ~~~
 ### 방법2) 웹어플리케이션 측
+src/main/resource/application.xml (스프링퀵스타트)
 ~~~xml
 <bean  id="propertyConfigurer"
       class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" >
@@ -156,6 +157,7 @@ public class MemberDAO {
       <property name="dataSource" ref="dataSource"  />
    </bean> 
 ~~~
+DAOImpl 
 ~~~java
 public class MemberDAOImpl implements MemberDAO {
 	private JdbcTemplate jdbcTemplate;
