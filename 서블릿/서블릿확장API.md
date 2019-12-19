@@ -12,11 +12,14 @@ Q. Servlet생성할 때, next 눌러서 체크란에 ingerited abstract methods�
 ### request.getRequestURL().toString();
 요청url전체<br>
 결과: http://localhost:8090/pro10/first/base 
-### request.getServletPath();<br>
-결과: /first/base 서블릿맵핑값에 대응하는 요청값 전체<br>
-### request.getPathInfo();<br>
-결과: /base 서블릿맵핑("/first/*")에서 맨 마지막 / 값<br>
-request.getRequestURI();<br>
+### request.getServletPath();
+서블릿맵핑값에 대응하는 요청값 전체<br>
+결과: /first/base 
+### request.getPathInfo();
+서블릿맵핑("/first/*")에서 맨 마지막 / 값<br>
+결과: /base 
+### request.getRequestURI();
+<br>
 결과: /pro10/first/base<br>
 
 # 포워드 기능
