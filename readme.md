@@ -258,7 +258,7 @@ project Name
        ┃  ┃	  ┗ resource    //image, css, javaScript
        ┃  ┃	  ┃    ┗ image	     
        ┃  ┃	  ┗ WEB-INF          // 외부에서 접근 불가능
-       ┃  ┃            ┗ lib   	     // 외부라이브러리(메이븐에서는 안씀)
+       ┃  ┃            ┗ lib   	     // 외부라이브러리(Oracle과 같은 오픈소스가 아닌 라이브러리 직접 다운받아야함)
        ┃  ┃            ┗ config
        ┃  ┃            ┃    ┗ presentation-layer.xml (servlet-context.xml 이라고도 불림)
        ┃  ┃            ┗ web.xml     // 배치 지시자(deployment decriptor)로서 일종의 환경설정파일
