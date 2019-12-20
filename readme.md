@@ -243,21 +243,24 @@ project Name
               ┗ web.xml
 ~~~
 
-### 스프링 프레임워크_개발환경에서의_구조
+### 스프링 프레임워크Maven 프로젝트_개발환경에서의_구조
 ~~~
 project Name
        ┗ src
        ┃  ┗ main  
-       ┃  ┃   ┗ java
-       ┃  ┃   ┗ resource
-       ┃  ┃         ┗ applicationContext.xml
-       ┃  ┃         ┗ config
-       ┃  ┃              ┗ database.properties
-       ┃  ┃   ┗ WEB-INF            // 외부에서 접근 불가능
-       ┃  ┃         ┗ classes     // 서블릿, 클래스
-       ┃  ┃         ┗ config
-       ┃  ┃         ┃    ┗ presentation-layer.xml
-       ┃  ┃         ┗ web.xml     // 배치 지시자(deployment decriptor)로서 일종의 환경설정파일
+       ┃  ┃   ┗ java		//소스파일 comm.myspring.pro27
+       ┃  ┃   ┗ resource  	//비즈니스컴포넌트에 대한 자원(xml, properties)
+       ┃  ┃   ┃     ┗ applicationContext.xml
+       ┃  ┃   ┃     ┗ config
+       ┃  ┃   ┃          ┗ database.properties
+       ┃  ┃   ┗ webapp
+       ┃  ┃	  ┗ resource    //image, css, javaScript
+       ┃  ┃	  ┃    ┗ image	     
+       ┃  ┃	  ┗ WEB-INF          // 외부에서 접근 불가능
+       ┃  ┃            ┗ lib   	     // 외부라이브러리(메이븐에서는 안씀)
+       ┃  ┃            ┗ config
+       ┃  ┃            ┃    ┗ presentation-layer.xml
+       ┃  ┃            ┗ web.xml     // 배치 지시자(deployment decriptor)로서 일종의 환경설정파일
        ┃  ┗ test
        ┃      ┗ java
        ┃      ┗ resource
