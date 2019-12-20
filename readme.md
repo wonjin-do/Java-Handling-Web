@@ -5,6 +5,7 @@
 [웹어플리케이션_폴더_구조](#웹어플리케이션_폴더_구조)<br>
 [개발환경_폴더구조](#개발환경_폴더구조)<br>
 [수동배포와 컨택스트의 의미](#수동배포)<br>
+[정적자원 경로맵핑](#정적자원)<br>
 [★★★배포에 필요한 빌드개념★★★](#빌드용어)
 
 ## 개발을 하고 싶어요
@@ -250,7 +251,7 @@ project Name
        ┃  ┗ main  
        ┃  ┃   ┗ java		//소스파일 comm.myspring.pro27
        ┃  ┃   ┗ resource  	//비즈니스컴포넌트에 대한 자원(xml, properties)
-       ┃  ┃   ┃     ┗ applicationContext.xml
+       ┃  ┃   ┃     ┗ applicationContext.xml //루트컨테이너
        ┃  ┃   ┃     ┗ config
        ┃  ┃   ┃          ┗ database.properties
        ┃  ┃   ┗ webapp
@@ -259,7 +260,7 @@ project Name
        ┃  ┃	  ┗ WEB-INF          // 외부에서 접근 불가능
        ┃  ┃            ┗ lib   	     // 외부라이브러리(메이븐에서는 안씀)
        ┃  ┃            ┗ config
-       ┃  ┃            ┃    ┗ presentation-layer.xml
+       ┃  ┃            ┃    ┗ presentation-layer.xml (servlet-context.xml 이라고도 불림)
        ┃  ┃            ┗ web.xml     // 배치 지시자(deployment decriptor)로서 일종의 환경설정파일
        ┃  ┗ test
        ┃      ┗ java
@@ -305,6 +306,9 @@ C:/tomcat9/             // CATALINA_HOME
 <Context path="/컨텍스트 이름 명명" docBase="웹 어플리케이션 실제경로" reloadable="true"/>
 ~~~
 를 달아준다.
+
+# 정적자원
+https://iwantadmin.tistory.com/133
 
 # 빌드용어
 ##.java -> .class -> jar/war 
