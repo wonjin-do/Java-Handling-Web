@@ -249,8 +249,8 @@ project Name
 project Name
        ┗ src
        ┃  ┗ main  
-       ┃  ┃   ┗ java		//소스파일 comm.myspring.pro27
-       ┃  ┃   ┗ resource  	//비즈니스컴포넌트에 대한 자원(xml, properties)
+       ┃  ┃   ┗ java(src/main/java)		//소스파일 comm.myspring.pro27
+       ┃  ┃   ┗ resource(src/main/resource)  	//비즈니스컴포넌트에 대한 자원(xml, properties)
        ┃  ┃   ┃     ┗ applicationContext.xml //루트컨테이너
        ┃  ┃   ┃     ┗ config
        ┃  ┃   ┃          ┗ database.properties
